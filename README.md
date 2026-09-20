@@ -1,0 +1,1 @@
+This project is a simple cryptocurrency price tracker that displays live USD prices for Bitcoin, Ethereum, and Dogecoin using the CoinGecko API.
