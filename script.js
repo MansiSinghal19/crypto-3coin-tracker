@@ -1,22 +1,29 @@
 async function getCryptoPrices() {
 
-    const url =
-        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd";
+    const urls = {
+        bitcoin: "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT",
+        ethereum: "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT",
+        dogecoin: "https://api.binance.com/api/v3/ticker/price?symbol=DOGEUSDT"
+    };
 
     try {
 
-        const response = await fetch(url);
+        const bitcoinResponse = await fetch(urls.bitcoin);
+        const ethereumResponse = await fetch(urls.ethereum);
+        const dogecoinResponse = await fetch(urls.dogecoin);
 
-        const data = await response.json();
+        const bitcoinData = await bitcoinResponse.json();
+        const ethereumData = await ethereumResponse.json();
+        const dogecoinData = await dogecoinResponse.json();
 
         document.getElementById("bitcoin-price").innerText =
-            "$" + data.bitcoin.usd;
+            "$" + Number(bitcoinData.price).toLocaleString();
 
         document.getElementById("ethereum-price").innerText =
-            "$" + data.ethereum.usd;
+            "$" + Number(ethereumData.price).toLocaleString();
 
         document.getElementById("dogecoin-price").innerText =
-            "$" + data.dogecoin.usd;
+            "$" + Number(dogecoinData.price).toLocaleString();
 
     } catch (error) {
 
